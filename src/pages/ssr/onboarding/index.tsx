@@ -69,7 +69,7 @@ const OnboardingPage = () => {
           <div className="text-center">
             <h2 className="text-xl font-bold mb-4">Enter Store Information</h2>
             {/* Store information form */}
-            <Link href="/final-page">
+            <Link href="/product-page">
               <span className="px-6 py-2 bg-blue-600 text-white rounded-lg">Continue</span>
             </Link>
           </div>
