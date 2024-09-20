@@ -1,47 +1,56 @@
-import { createContext, useState, useContext, ReactNode } from "react";
-import axios from "axios";
+import { createContext, useState, useEffect, ReactNode } from "react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
-interface AuthContextType {
-  user: any;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+interface AuthContextProps {
   isAuthenticated: boolean;
+  loading: boolean;
+  login: (email: string, password: string) => Promise<boolean>;
+  logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextProps>({
+  isAuthenticated: false,
+  loading: true,
+  login: async () => false,
+  logout: () => {},
+});
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
+
+  // Check local storage on mount to see if user is authenticated
+  useEffect(() => {
+    const storedAuth = localStorage.getItem("isAuthenticated");
+    if (storedAuth) {
+      setIsAuthenticated(JSON.parse(storedAuth));
+    }
+    setLoading(false);
+  }, []);
 
   const login = async (email: string, password: string) => {
-    try {
-      const res = await axios.post("/api/auth/login", { email, password });
-      setUser(res.data.user);
-      localStorage.setItem("token", res.data.token);
-    } catch (error) {
-      console.error("Login failed", error);
+    // Simulate login process
+    if (email === "user@example.com" && password === "password123") {
+      setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", "true"); // Persist login status
+      return true;
+    } else {
+      return false;
     }
   };
 
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    localStorage.removeItem("isAuthenticated"); // Remove login status from localStorage
+    toast.success("Logged out successfully");
+    router.push("/login");
   };
 
-  const isAuthenticated = !!user;
-
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-// Custom hook to use auth
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };
