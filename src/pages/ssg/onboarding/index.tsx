@@ -3,7 +3,7 @@ import { OnboardingContext } from "@/context/OnboardingContext";
 import InputField from "@/components/InputField";
 import Link from "next/link";
 import Image from "next/image";
-import UploadFile from "@/pages/ssr/onboarding/UploadFile";
+import UploadFile from "@/components/UploadFile";
 import StepThree from "@/components/registrationSteps/StepThree";
 import StepTwo from "@/components/registrationSteps/StepTwo";
 import StepOne from "@/components/registrationSteps/StepOne";

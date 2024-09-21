@@ -1,6 +1,5 @@
 import InputField from "@/components/InputField";
-import UploadFile from "@/pages/ssr/onboarding/UploadFile";
-import Link from "next/link";
+import UploadFile from "@/components/UploadFile";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -18,7 +17,7 @@ const StepThree = ({
   const router = useRouter();
 
   const handleContinue = () => {
-    toast.success("Registration successful!", {
+    toast.success("Registration successful! Proceed to login", {
       position: "top-right",
       autoClose: 2000,
     });

@@ -40,7 +40,7 @@ const OnboardingPage = ({ onboardingSteps }: { onboardingSteps: string[] }) => {
           <span className="font-medium text-base">Get started</span>
         </button>
       ) : (
-        <Link href="/ssg/welcome">
+        <Link href="/ssr/welcome">
           <span className="self-start gap-2 mb-4 flex items-center justify-start">
             <Image src="/l-nav2.png" alt="back_arrow" width={10} height={10} />
             <span className="font-medium text-base">Get started</span>
