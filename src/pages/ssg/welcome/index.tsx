@@ -33,7 +33,7 @@ const WelcomePageSSG = () => {
         </ul>
       </div>
       <Link href="/ssg/onboarding" className="w-full">
-        <span className="px-2.5 py-2.5 w-full rounded-[90px] bg-[#8A226F] text-white font-bold hover:bg-pink-950 transition flex items-center justify-center">
+        <span className="px-2.5 py-1.5 w-full rounded-[90px] bg-[#8A226F] text-white font-bold hover:bg-pink-950 transition flex items-center justify-center">
           Get Started
         </span>
       </Link>
