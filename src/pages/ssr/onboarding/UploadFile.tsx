@@ -15,7 +15,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ value, onChange }) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImage(reader.result);
-        onChange(event); // Call the parent onChange function if needed
+        onChange(event);
       };
       reader.readAsDataURL(file);
     }
@@ -33,11 +33,14 @@ const UploadFile: React.FC<UploadFileProps> = ({ value, onChange }) => {
           <img
             src={selectedImage as string}
             alt="Uploaded"
-            className="object-cover w-full h-full rounded-lg"
+            className="object-cover w-[100px] h-[100px] rounded-full"
           />
         ) : (
-          <div className="flex items-center justify-center w-[80px] h-[80px] rounded-full bg-[#E0E0E0] border-2 border-[#E0E0E0]">
-            <Image src="/add_a_photo.png" alt="Camera" width={40} height={40} />
+          <div className="flex items-center justify-center flex-col">
+            <div className="flex items-center justify-center w-[80px] h-[80px] rounded-full bg-[#E0E0E0] border-2 border-[#E0E0E0]">
+              <Image src="/add_a_photo.png" alt="Camera" width={40} height={40} />
+            </div>
+            <p className="mt-2 text-sm text-center text-[#00000099]">Click to upload an image</p>
           </div>
         )}
         <input
@@ -48,7 +51,6 @@ const UploadFile: React.FC<UploadFileProps> = ({ value, onChange }) => {
           onChange={handleFileChange}
         />
       </label>
-      <p className="mt-2 text-sm text-center text-[#00000099]">Click to upload an image</p>
     </div>
   );
 };
