@@ -1,6 +1,7 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode, useContext } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { OnboardingContext } from "./OnboardingContext";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
@@ -19,9 +20,11 @@ export const AuthContext = createContext<AuthContextProps>({
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const router = useRouter();
+  const { userData } = useContext(OnboardingContext);
 
-  // Check local storage on mount to see if user is authenticated
+  const router = useRouter();
+  console.log(userData);
+
   useEffect(() => {
     const storedAuth = localStorage.getItem("isAuthenticated");
     if (storedAuth) {
@@ -30,11 +33,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string) => {
-    // Simulate login process
-    if (email === "user@example.com" && password === "password123") {
+  const login = async (credential: string, password: string) => {
+    const dummyEmail = "dummy@example.com";
+    const dummyPhone = "1234567890";
+    const dummyPassword = userData.phone ? userData.phone : "password123";
+
+    const email = userData.email ? userData.email : dummyEmail;
+    const phone = userData.phone ? userData.phone : dummyPhone;
+
+    if ((credential === email || credential === phone) && password === dummyPassword) {
       setIsAuthenticated(true);
-      localStorage.setItem("isAuthenticated", "true"); // Persist login status
+      localStorage.setItem("isAuthenticated", "true");
       return true;
     } else {
       return false;
