@@ -22,13 +22,16 @@ const OnboardingPage = () => {
     <div className="min-h-screen flex flex-col justify-start bg-gray-100 p-5">
       {/* Back Arrow */}
       {step > 1 ? (
-        <button onClick={handlePrevious} className="self-start gap-3 mb-4">
+        <button
+          onClick={handlePrevious}
+          className="self-start gap-2 mb-4 flex items-center justify-start"
+        >
           <Image src="/l-nav2.png" alt="back_arrow" width={10} height={10} />{" "}
-          <span>Get started</span>
+          <span className="font-medium text-base">Get started</span>
         </button>
       ) : (
         <Link href="/ssg/welcome">
-          <span className="self-start gap-3 mb-4 flex items-center justify-start">
+          <span className="self-start gap-2 mb-4 flex items-center justify-start">
             <Image src="/l-nav2.png" alt="back_arrow" width={10} height={10} />
             <span className="font-medium text-base">Get started</span>
           </span>
@@ -36,11 +39,11 @@ const OnboardingPage = () => {
       )}
 
       {/* Progress Bar */}
-      <div className="flex space-x-2 mb-8">
+      <div className="flex space-x-2 mb-8 w-full">
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className={`h-2 w-8 rounded-lg ${step >= i ? "bg-brown-600" : "bg-gray-300"}`}
+            className={`flex-1 h-1 rounded-lg ${step >= i ? "bg-[#8A226F]" : "bg-gray-300"}`}
           ></div>
         ))}
       </div>
