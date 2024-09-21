@@ -32,13 +32,13 @@ const OnboardingPage = ({ onboardingSteps }: { onboardingSteps: string[] }) => {
   return (
     <div className="min-h-screen flex flex-col justify-start bg-white p-5">
       {step > 1 ? (
-        <button
+        <div
           onClick={handlePrevious}
           className="self-start gap-2 mb-4 flex items-center justify-start"
         >
           <Image src="/l-nav2.png" alt="back_arrow" width={10} height={10} />{" "}
           <span className="font-medium text-base">Get started</span>
-        </button>
+        </div>
       ) : (
         <Link href="/ssg/welcome">
           <span className="self-start gap-2 mb-4 flex items-center justify-start">
