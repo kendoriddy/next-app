@@ -1,6 +1,7 @@
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 const OnboardingPage = () => {
   const [step, setStep] = useState(1);
@@ -18,15 +19,19 @@ const OnboardingPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-5">
+    <div className="min-h-screen flex flex-col justify-start bg-gray-100 p-5">
       {/* Back Arrow */}
       {step > 1 ? (
-        <button onClick={handlePrevious} className="self-start mb-4">
-          <FaArrowLeft /> Back
+        <button onClick={handlePrevious} className="self-start gap-3 mb-4">
+          <Image src="/l-nav2.png" alt="back_arrow" width={10} height={10} />{" "}
+          <span>Get started</span>
         </button>
       ) : (
         <Link href="/ssg/welcome">
-          <span className="self-start mb-4">← Back to Welcome</span>
+          <span className="self-start gap-3 mb-4 flex items-center justify-start">
+            <Image src="/l-nav2.png" alt="back_arrow" width={10} height={10} />
+            <span className="font-medium text-base">Get started</span>
+          </span>
         </Link>
       )}
 
