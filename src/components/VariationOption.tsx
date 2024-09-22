@@ -20,12 +20,10 @@ export const VariationOption: React.FC<VariationOptionProps> = ({
   onUpdate,
   onDelete,
 }) => {
-  // Initialize local state with the passed-in props
   const [variationName, setVariationName] = useState(option.variationName);
   const [variationValues, setVariationValues] = useState<string[]>(option.variationValues || []);
   const [inputValue, setInputValue] = useState("");
 
-  // Handle adding new variation values when the user presses "Enter"
   const handleAddValue = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       setVariationValues((prev) => [...prev, inputValue.trim()]);
@@ -34,12 +32,10 @@ export const VariationOption: React.FC<VariationOptionProps> = ({
     }
   };
 
-  // Handle removing a variation value
   const handleRemoveValue = (value: string) => {
     setVariationValues(variationValues.filter((v) => v !== value));
   };
 
-  // Update the parent component whenever variationName or variationValues changes
   useEffect(() => {
     onUpdate(index, { variationName, variationValues });
   }, [variationName, variationValues]);
@@ -56,7 +52,7 @@ export const VariationOption: React.FC<VariationOptionProps> = ({
         label={`Enter variation Name`}
         name={`variationName_${index}`}
         value={variationName}
-        onChange={(e) => setVariationName(e.target.value)} // Update the local state
+        onChange={(e) => setVariationName(e.target.value)}
       />
 
       {/* Display added values */}
@@ -71,13 +67,13 @@ export const VariationOption: React.FC<VariationOptionProps> = ({
           </span>
         ))}
 
-        {/* Enter multiple variation values */}
+        {/* multiple variation values */}
         <div className="mt-3 w-full">
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)} // Update the input state
-            onKeyDown={handleAddValue} // Handle pressing "Enter"
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={handleAddValue}
             placeholder="Enter values and press Enter"
             className="border border-none rounded px-3 py-2 w-full outline-none font-medium text-[12px]"
           />
