@@ -24,7 +24,7 @@ const StepThree = ({
 
     setTimeout(() => {
       router.push("/login");
-    }, 2000);
+    }, 1000);
   };
   return (
     <div className="min-h-[85vh] flex flex-col justify-between items-center w-full">

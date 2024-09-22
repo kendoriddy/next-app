@@ -25,16 +25,16 @@ const LoginComponent = () => {
       if (isSuccess) {
         toast.success("Login successful! Redirecting...", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 2000,
         });
         router.push("/product-page");
       } else {
         toast.error("Login failed! Check your credentials.", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 2000,
         });
       }
-    }, 1500);
+    }, 1000);
   };
 
   const { userData } = useContext(OnboardingContext);

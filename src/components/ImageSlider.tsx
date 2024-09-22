@@ -5,6 +5,7 @@ interface ImageData {
   file: File | {};
   name: string;
   isActive: boolean;
+  base64?: string;
 }
 
 interface ImageSliderProps {
@@ -14,16 +15,16 @@ interface ImageSliderProps {
 const ImageSlider: React.FC<ImageSliderProps> = ({ images = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const validImages = Array.isArray(images) ? images : [];
+  // Filter only active images
+  const activeImages = images && images?.filter((image) => image.isActive);
 
-  const activeImages = validImages.filter((image) => image.isActive);
-
+  // Use the provided images or default placeholders
   const displayImages =
     activeImages.length > 0
       ? activeImages
       : [
-          { file: {}, name: "Placeholder 1", isActive: true },
-          { file: {}, name: "Placeholder 2", isActive: true },
+          { file: {}, name: "Placeholder 1", isActive: true, base64: "" },
+          { file: {}, name: "Placeholder 2", isActive: true, base64: "" },
         ];
 
   const handleNext = () => {
@@ -38,13 +39,24 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images = [] }) => {
     <div className="relative w-full max-w-lg mx-auto">
       {displayImages.length > 0 && (
         <div className="flex items-center justify-center w-full h-64 bg-gray-100 rounded-lg overflow-hidden relative">
-          <Image
-            src={`/PRODUCTIMAGE.png`}
-            alt={displayImages[currentIndex].name}
-            width={400}
-            height={400}
-            className="object-contain"
-          />
+          {displayImages[currentIndex].base64 ? (
+            <Image
+              src={displayImages[currentIndex].base64}
+              alt={displayImages[currentIndex].name}
+              width={400}
+              height={400}
+              className="object-contain"
+            />
+          ) : (
+            // Show default image if no base64 available
+            <Image
+              src="/PRODUCTIMAGE.png"
+              alt="Default Image"
+              width={400}
+              height={400}
+              className="object-contain"
+            />
+          )}
         </div>
       )}
 

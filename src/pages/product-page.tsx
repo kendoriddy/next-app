@@ -9,7 +9,6 @@ import Image from "next/image";
 import { BiCheck, BiChevronDown } from "react-icons/bi";
 import { FormContext } from "@/context/FormContext";
 import CollectionInput from "@/components/registrationSteps/CollectionInput";
-import { FaCheck, FaTimes } from "react-icons/fa";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { MdMoreHoriz } from "react-icons/md";
 import { VariationOption } from "../components/VariationOption";
@@ -21,7 +20,7 @@ const ProductsPage = () => {
   const { formData, setFormData } = useContext(FormContext);
   const router = useRouter();
   const [selectedImages, setSelectedImages] = useState<
-    { file: File; name: string; isActive: boolean }[]
+    { file: File; name: string; isActive: boolean; base64: any }[]
   >([]);
   const [variationOptions, setVariationOptions] = useState<
     { variationName: string; variationValues: string[] }[]
@@ -48,18 +47,45 @@ const ProductsPage = () => {
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
-      const newImages = filesArray.map((file) => ({
-        file,
-        name: file.name,
-        isActive: true,
-      }));
-      const updatedImages = [...selectedImages, ...newImages];
-      setSelectedImages(updatedImages);
 
-      setFormData({
-        ...formData,
-        images: updatedImages,
-      });
+      // Function to convert file to base64
+      const toBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = (error) => reject(error);
+        });
+      };
+
+      const processImages = async () => {
+        const newImages = await Promise.all(
+          filesArray.map(async (file) => {
+            const base64 = await toBase64(file);
+            return {
+              file,
+              name: file.name,
+              isActive: true,
+              base64,
+            };
+          })
+        );
+
+        const updatedImages = [...selectedImages, ...newImages];
+        setSelectedImages(updatedImages);
+
+        // Update formData with base64 images
+        setFormData({
+          ...formData,
+          images: updatedImages.map((image) => ({
+            name: image.name,
+            isActive: image.isActive,
+            base64: image.base64, // Include base64 here
+          })),
+        });
+      };
+
+      processImages();
     }
   };
 
