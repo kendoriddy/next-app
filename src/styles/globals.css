@@ -92,3 +92,10 @@ body {
     transform: translateX(100%);
   }
 }
+
+input[type="checkbox"] {
+  accent-color: #8a226f;
+  height: 15px;
+  width: 15px;
+  border-radius: 10px;
+}
