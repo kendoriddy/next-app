@@ -11,15 +11,19 @@ import { FormContext } from "@/context/FormContext";
 import CollectionInput from "@/components/registrationSteps/CollectionInput";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
+import { MdMoreHoriz } from "react-icons/md";
+import { VariationOption } from "./VariationOption";
+import { IoAdd } from "react-icons/io5";
 
 const ProductsPage = () => {
   const { isAuthenticated, loading, logout } = useContext(AuthContext);
   const { formData, setFormData } = useContext(FormContext);
   const router = useRouter();
-  const [inputValue, setInputValue] = useState("");
-  const [textareaValue, setTextareaValue] = useState("");
   const [selectedImages, setSelectedImages] = useState<
     { file: File; name: string; isActive: boolean }[]
+  >([]);
+  const [variationOptions, setVariationOptions] = useState<
+    { variationName: string; variationValues: string[] }[]
   >([]);
 
   useEffect(() => {
@@ -34,7 +38,7 @@ const ProductsPage = () => {
     setFormData({ ...formData, collections });
   };
 
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSave = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     console.log(formData);
 
@@ -66,11 +70,26 @@ const ProductsPage = () => {
     );
     setSelectedImages(updatedImages);
 
-    // Update FormContext
     setFormData({
       ...formData,
       images: updatedImages,
     });
+  };
+
+  const handleVariationChange = (index: number, updatedOption: any) => {
+    const updatedVariations = variationOptions.map((option, i) =>
+      i === index ? updatedOption : option
+    );
+    setVariationOptions(updatedVariations);
+    setFormData({ ...formData, variations: updatedVariations });
+  };
+
+  const handleAddNewOption = () => {
+    setVariationOptions([...variationOptions, { variationName: "", variationValues: [] }]);
+  };
+
+  const handleDeleteOption = (index: number) => {
+    setVariationOptions(variationOptions.filter((_, i) => i !== index));
   };
 
   const truncateText = (text: string, maxLength: number): string => {
@@ -104,7 +123,7 @@ const ProductsPage = () => {
           </Link>
         </div>
       </div>
-      <form onSubmit={handleSave}>
+      <form>
         <hr className="h-[0.5px] mb-4 -mx-4 mt-2" />
 
         <div>
@@ -193,7 +212,8 @@ const ProductsPage = () => {
                   <span className="text-sm font-normal">{truncateText(image.name, 12)}</span>
                 </div>
                 {/* Toggle Button */}
-                <div>
+                <div className="flex items-center">
+                  <MdMoreHoriz className="text-[#8A226F]" />
                   <button
                     type="button"
                     onClick={() => handleToggleImage(index)}
@@ -255,6 +275,27 @@ const ProductsPage = () => {
               This product is variable; has different colors, sizes, weight, materials, etc.
             </label>
           </div>
+          {formData.isVariableProduct && (
+            <div className="mt-4">
+              {variationOptions.map((option, index) => (
+                <VariationOption
+                  key={index}
+                  index={index}
+                  option={option}
+                  onUpdate={handleVariationChange}
+                  onDelete={handleDeleteOption}
+                />
+              ))}
+              <button
+                type="button"
+                className="text-sm font-medium text-[#8A226F] border border-[#8A226F] rounded-[90px] px-4 py-2 mt-4 flex items-center gap-2 bg-[#00000008] w-full justify-center"
+                onClick={handleAddNewOption}
+              >
+                <IoAdd className="text-[#8A226F] h-5 w-5" />
+                <span>Add New Option</span>
+              </button>
+            </div>
+          )}
         </div>
 
         <hr className="h-[0.5px] mb-4 -mx-4 mt-4" />
@@ -316,22 +357,21 @@ const ProductsPage = () => {
         </div>
 
         <hr className="h-[0.5px] mb-4 -mx-4 mt-8" />
-
-        <div className="flex gap-4 items-center justify-center">
-          <button
-            type="button"
-            className="text-sm cursor-pointer font-medium border border-[#8A226F] text-[#8A226F] rounded-[90px] p-2.5 w-[40%]"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="text-sm cursor-pointer font-medium rounded-[90px] p-2.5 w-[40%] bg-[#8A226F] text-white"
-          >
-            Save
-          </button>
-        </div>
       </form>
+      <div className="flex gap-4 items-center justify-center">
+        <button
+          type="button"
+          className="text-sm cursor-pointer font-medium border border-[#8A226F] text-[#8A226F] rounded-[90px] p-2.5 w-[40%]"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={(e: any) => handleSave(e)}
+          className="text-sm cursor-pointer font-medium rounded-[90px] p-2.5 w-[40%] bg-[#8A226F] text-white"
+        >
+          Save
+        </button>
+      </div>
     </div>
   );
 };
