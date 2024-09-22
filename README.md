@@ -1,7 +1,3 @@
-Here’s a detailed `README.md` file for your Next.js project:
-
----
-
 # Next.js + TypeScript Shopping Application
 
 This is a Next.js web application developed using TypeScript and styled with Tailwind CSS. The application uses both Server-Side Rendering (SSR) and Static Site Generation (SSG), has a global state management setup, and includes authentication middleware for secure access to product pages. The app is also built as a Progressive Web App (PWA), ensuring it is responsive and accessible across mobile devices.
@@ -91,6 +87,7 @@ SSR generates pages dynamically on the server for each incoming request. The HTM
 - **Faster time to interaction**: Users receive a fully rendered page faster compared to client-side rendering.
 
 **Where SSR was used**:
+
 - I chose SSR for the product page because it needs to verify user authentication and fetch user-specific data dynamically. This ensures that only authenticated users can access the product details.
 
 ### **Static Site Generation (SSG)**
@@ -104,6 +101,7 @@ SSG generates pages at build time. The HTML is generated once and served to all 
 - **Great for SEO**: Like SSR, SSG pages are pre-rendered and are SEO-friendly.
 
 **Where SSG was used**:
+
 - I used SSG for static content pages like the welcome page. Since these pages do not change often, they are ideal for pre-rendering at build time, leading to faster load times and improved performance.
 
 ---
@@ -130,10 +128,7 @@ To use Tailwind, make sure to add the following lines to your `tailwind.config.j
 
 ```js
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
@@ -156,9 +151,9 @@ npm install next-pwa
 Then, configure the PWA in `next.config.js`:
 
 ```js
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
+const withPWA = require("next-pwa")({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
 });
 
 module.exports = withPWA({
@@ -194,3 +189,4 @@ To deploy the app:
 
 This Next.js application is a fully-featured web application that incorporates SSR, SSG, TypeScript, global state management, and authentication middleware. It also utilizes Tailwind CSS for responsive design and is optimized for mobile use as a PWA. The app is easily extendable and follows best practices for modern web development.
 
+This Next.js application is a fully-featured web application that incorporates SSR, SSG, TypeScript, global state management, and authentication middleware. It also utilizes Tailwind CSS for responsive design and is optimized for mobile use as a PWA. The app is easily extendable and follows best practices for modern web development.

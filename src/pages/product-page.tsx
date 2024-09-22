@@ -24,16 +24,6 @@ export async function getServerSideProps(context: { req: any }) {
 
   // We could also fetch other data related to products here (e.g., collections, variations, etc.)
 
-  if (!authToken) {
-    // If not authenticated, redirect to the login page
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
   // Return data as props for the page component
   return {
     props: {
