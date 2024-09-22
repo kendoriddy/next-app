@@ -17,7 +17,7 @@ import { IoAdd } from "react-icons/io5";
 import VariantPriceStockComponent from "@/components/VariantPriceStockComponent";
 
 const ProductsPage = () => {
-  const { isAuthenticated, loading, logout } = useContext(AuthContext);
+  const { isAuthenticated, loading } = useContext(AuthContext);
   const { formData, setFormData } = useContext(FormContext);
   const router = useRouter();
   const [selectedImages, setSelectedImages] = useState<
@@ -52,7 +52,7 @@ const ProductsPage = () => {
       const newImages = filesArray.map((file) => ({
         file,
         name: file.name,
-        isActive: false, // For toggle functionality
+        isActive: true, // For toggle functionality
       }));
       const updatedImages = [...selectedImages, ...newImages];
       setSelectedImages(updatedImages);
