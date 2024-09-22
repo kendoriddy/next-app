@@ -1,6 +1,3 @@
-Here’s a detailed `README.md` file for your Next.js project:
-
----
 
 # Next.js + TypeScript Shopping Application
 
