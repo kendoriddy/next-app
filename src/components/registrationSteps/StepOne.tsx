@@ -15,7 +15,7 @@ const StepOne = ({
   userData: any;
 }) => {
   return (
-    <div className="min-h-[85vh] flex flex-col justify-between items-center">
+    <div className="min-h-[85vh] flex flex-col justify-between items-center w-full">
       <div className="flex flex-col justify-normal items-start gap-6">
         <div>
           <h2 className="text-xl font-semibold mb-4">{onboardingSteps[0]}</h2>

@@ -5,8 +5,7 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import InputField from "./InputField";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +18,6 @@ const LoginComponent = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate delay for 2 seconds
     setTimeout(async () => {
       const isSuccess = await login(email, password);
       setLoading(false);
@@ -36,7 +34,7 @@ const LoginComponent = () => {
           autoClose: 3000,
         });
       }
-    }, 1500); // 2 second delay
+    }, 1500);
   };
 
   const { userData } = useContext(OnboardingContext);

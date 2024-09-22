@@ -18,7 +18,7 @@ const StepTwo = ({
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-between items-center w-full">
+    <div className="min-h-[85vh] flex flex-col justify-between items-center w-full w-full">
       <div className="flex flex-col justify-normal items-start gap-6 w-full">
         <div className="w-full">
           <h2 className="text-xl font-semibold mb-4">{onboardingSteps[1]}</h2>
