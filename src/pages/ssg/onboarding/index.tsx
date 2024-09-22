@@ -1,9 +1,7 @@
 import { useContext, useState } from "react";
 import { OnboardingContext } from "@/context/OnboardingContext";
-import InputField from "@/components/InputField";
 import Link from "next/link";
 import Image from "next/image";
-import UploadFile from "@/components/UploadFile";
 import StepThree from "@/components/registrationSteps/StepThree";
 import StepTwo from "@/components/registrationSteps/StepTwo";
 import StepOne from "@/components/registrationSteps/StepOne";
@@ -86,7 +84,7 @@ const OnboardingPage = ({ onboardingSteps }: { onboardingSteps: string[] }) => {
 
 // Simulate fetching onboarding steps
 export async function getStaticProps() {
-  // Here, you could make an actual API request. For demonstration, I will use hardcoded data.
+  // Here, we can make an actual API request. For demonstration, I will use hardcoded data.
   const onboardingSteps = ["Enter your phone number or email", "Complete Profile Setup", ""];
 
   return {

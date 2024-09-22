@@ -18,8 +18,8 @@ const CollectionInput: React.FC<CollectionInputProps> = ({ label, value, onChang
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       e.preventDefault();
-      onChange([...value, inputValue.trim()]); // Add the input value to the list
-      setInputValue(""); // Clear input field
+      onChange([...value, inputValue.trim()]);
+      setInputValue("");
     }
   };
 

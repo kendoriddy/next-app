@@ -10,7 +10,7 @@ const WelcomePageSSG = ({ reasons }: { reasons: string[] }) => {
         <Image
           src="/sale.svg"
           alt="Welcome image"
-          width={200} // Increased size for demonstration
+          width={200}
           height={200}
           className="mb-8 w-1/2 h-auto"
         />

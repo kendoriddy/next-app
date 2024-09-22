@@ -41,7 +41,6 @@ const ProductsPage = () => {
 
   const handleSave = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(formData);
 
     router.push("/preview-product");
   };
@@ -52,12 +51,11 @@ const ProductsPage = () => {
       const newImages = filesArray.map((file) => ({
         file,
         name: file.name,
-        isActive: true, // For toggle functionality
+        isActive: true,
       }));
       const updatedImages = [...selectedImages, ...newImages];
       setSelectedImages(updatedImages);
 
-      // Update FormContext with the selected images
       setFormData({
         ...formData,
         images: updatedImages,

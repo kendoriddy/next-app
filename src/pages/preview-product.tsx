@@ -8,9 +8,8 @@ import React, { useContext } from "react";
 import { CgMoreVerticalAlt } from "react-icons/cg";
 
 const PreviewProduct = () => {
-  const { formData, setFormData } = useContext(FormContext);
+  const { formData } = useContext(FormContext);
 
-  console.log(formData);
   return (
     <div className="py-3">
       <div className="flex items-center justify-between mb-3">

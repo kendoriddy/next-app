@@ -1,4 +1,3 @@
-import FloatingLabelInput from "@/components/registrationSteps/FloatingLabelInput";
 import FloatingLabelInput2 from "@/components/registrationSteps/FloatingLabelInput2";
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
@@ -27,7 +26,7 @@ export const VariationOption: React.FC<VariationOptionProps> = ({
   const handleAddValue = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       setVariationValues((prev) => [...prev, inputValue.trim()]);
-      setInputValue(""); // Clear the input after adding
+      setInputValue("");
       e.preventDefault();
     }
   };

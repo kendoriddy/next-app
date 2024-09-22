@@ -27,7 +27,7 @@ const StepThree = ({
     }, 2000);
   };
   return (
-    <div className="min-h-[85vh] flex flex-col justify-between items-center w-full w-full">
+    <div className="min-h-[85vh] flex flex-col justify-between items-center w-full">
       <div className="flex flex-col justify-normal items-start gap-6 w-full">
         <div className="w-full">
           <UploadFile
@@ -36,7 +36,6 @@ const StepThree = ({
               const files = e.target.files;
               if (files && files[0]) {
                 const file = files[0];
-                // Update the userData state with the image file or base64 data
                 const reader = new FileReader();
                 reader.onloadend = () => {
                   setUserData((prev: typeof userData) => ({

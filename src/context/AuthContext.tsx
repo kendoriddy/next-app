@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { userData } = useContext(OnboardingContext);
 
   const router = useRouter();
-  console.log(userData);
 
   useEffect(() => {
     const storedAuth = localStorage.getItem("isAuthenticated");
@@ -52,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem("isAuthenticated"); // Remove login status from localStorage
+    localStorage.removeItem("isAuthenticated");
     toast.success("Logged out successfully");
     router.push("/login");
   };
