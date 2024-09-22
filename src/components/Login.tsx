@@ -27,7 +27,6 @@ const LoginComponent = () => {
           position: "top-right",
           autoClose: 2000,
         });
-        console.log("please push");
         router.push("/product-page");
       } else {
         toast.error("Login failed! Check your credentials.", {
