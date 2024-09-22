@@ -4,7 +4,11 @@ import { BiChevronDown } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
 import { PiShareFatThin } from "react-icons/pi";
 
-const ProductDetails = () => {
+interface ProductDetailsProps {
+  formData: any;
+}
+
+const ProductDetails: React.FC<ProductDetailsProps> = ({ formData }) => {
   const [showDescription, setShowDescription] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -22,7 +26,7 @@ const ProductDetails = () => {
       <div className="mb-4">
         <div className="flex justify-between items-start">
           <h2 className="text-[14px] font-semibold">
-            Gucci bag – the epitome of luxury and sophistication
+            {formData?.title || "Gucci bag - the epitome of luxury and sophistication"}
           </h2>
           <div className="flex gap-2">
             <button className="text-gray-600 bg-gray-200 rounded-[100px] p-2 hover:text-gray-700">

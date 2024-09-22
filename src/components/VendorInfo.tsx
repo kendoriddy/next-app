@@ -2,7 +2,11 @@ import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { HiOutlineUsers } from "react-icons/hi";
 
-const VendorInfo = () => {
+interface VendorInfoProps {
+  formData: any;
+}
+
+const VendorInfo: React.FC<VendorInfoProps> = ({ formData }) => {
   const vendorTags = [
     "Quality goods",
     "Nice designs",
@@ -36,14 +40,17 @@ const VendorInfo = () => {
               </p>
             </div>
           </div>
-          <button className="text-[#8A226F] text-[12px] font-medium font-medium">Follow</button>
+          <button className="text-[#8A226F] text-[12px] font-medium">Follow</button>
         </div>
 
         {/* Vendor Description */}
         <div className="mb-4">
           <p className="text-sm text-gray-500">
-            Vendor description: You can track your parcel on the following website using your
-            tracking number: www.17trac...
+            Vendor description:
+            <span>
+              {formData.description ||
+                "You can track your parcel on the following website using your tracking number. https://www.17trac..."}
+            </span>
           </p>
         </div>
 

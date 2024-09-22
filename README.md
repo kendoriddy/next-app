@@ -1,40 +1,194 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Here’s a detailed `README.md` file for your Next.js project:
+
+---
+
+# Next.js + TypeScript Shopping Application
+
+This is a Next.js web application developed using TypeScript and styled with Tailwind CSS. The application uses both Server-Side Rendering (SSR) and Static Site Generation (SSG), has a global state management setup, and includes authentication middleware for secure access to product pages. The app is also built as a Progressive Web App (PWA), ensuring it is responsive and accessible across mobile devices.
+
+## Features
+
+- **Figma Design Implementation**: The app accurately replicates the design provided in the Figma file.
+- **SSR & SSG**: The app implements both SSR and SSG for optimized data fetching and page generation.
+- **TypeScript**: One of the pages or components is implemented using TypeScript.
+- **Tailwind CSS**: Responsive and utility-first styling using Tailwind CSS.
+- **Global State Management**: Utilizes Context API for managing the authentication state across the app.
+- **Authentication Middleware**: Middleware check to verify user authentication before accessing the product page.
+- **PWA**: The app is set up as a Progressive Web App for better performance and accessibility on mobile devices.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Running the Application in CodeSandbox
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+To run the application on CodeSandbox, follow these steps:
+
+1. Open the following link: [CodeSandbox](https://codesandbox.io/).
+2. Fork the project or open your own workspace.
+3. Upload or import the project files.
+4. Install the dependencies by running the following command:
+
+   ```bash
+   npm install
+   ```
+
+5. Start the development server with:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Open the browser to the URL displayed in the terminal to view the app in development mode.
+
+---
+
+### How to Build and Run Locally
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   cd your-repo
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**:
+
+   ```bash
+   npm run build
+   ```
+
+5. **Start the production server**:
+
+   ```bash
+   npm run start
+   ```
+
+---
+
+## SSR vs. SSG
+
+### **Server-Side Rendering (SSR)**
+
+SSR generates pages dynamically on the server for each incoming request. The HTML is fully rendered before being sent to the client, which ensures that users always receive the most up-to-date version of the page.
+
+**Advantages of SSR:**
+
+- **Dynamic content**: Useful for pages that require real-time data fetching (e.g., user-specific or time-sensitive information).
+- **SEO-friendly**: Search engines receive fully-rendered pages, which is great for content that needs to be indexed.
+- **Faster time to interaction**: Users receive a fully rendered page faster compared to client-side rendering.
+
+**Where SSR was used**:
+
+- I chose SSR for the product page because it needs to verify user authentication and fetch user-specific data dynamically. This ensures that only authenticated users can access the product details.
+
+### **Static Site Generation (SSG)**
+
+SSG generates pages at build time. The HTML is generated once and served to all users, which makes the page load faster for users because the server doesn't need to generate it dynamically for each request.
+
+**Advantages of SSG:**
+
+- **Speed**: Once the page is generated at build time, it is served statically, making it extremely fast for users.
+- **Scalability**: Since pages are pre-generated, the server load is reduced, making the app easier to scale.
+- **Great for SEO**: Like SSR, SSG pages are pre-rendered and are SEO-friendly.
+
+**Where SSG was used**:
+
+- I used SSG for static content pages like the welcome page. Since these pages do not change often, they are ideal for pre-rendering at build time, leading to faster load times and improved performance.
+
+---
+
+## Global State Management
+
+The global state is managed using the **Context API**. This allows easy management of authentication status (whether the user is logged in or not) across different components of the app.
+
+The `AuthContext` is created to handle authentication logic, including `login`, `logout`, and state persistence using `localStorage`.
+
+---
+
+## Authentication Middleware
+
+To protect certain pages (like the product page), an authentication middleware is implemented using a `middleware.ts` file. This middleware checks if the user is authenticated before allowing them to access certain pages. If the user is not authenticated, they are redirected to the login page.
+
+---
+
+## Tailwind CSS Integration
+
+This project uses **Tailwind CSS** for responsive and utility-first styling. Tailwind allows us to build a responsive and mobile-friendly UI quickly and efficiently.
+
+To use Tailwind, make sure to add the following lines to your `tailwind.config.js`:
+
+```js
+module.exports = {
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Progressive Web App (PWA) Setup
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The app is built as a **PWA** using the `next-pwa` package to ensure that it works seamlessly across different devices, especially mobile. PWAs provide offline capabilities and improve the app's performance on mobile devices.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To set up the PWA, install the `next-pwa` package:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm install next-pwa
+```
 
-## Learn More
+Then, configure the PWA in `next.config.js`:
 
-To learn more about Next.js, take a look at the following resources:
+```js
+const withPWA = require("next-pwa")({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+});
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+module.exports = withPWA({
+  reactStrictMode: true,
+});
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Libraries and Tools Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js**: For SSR/SSG and routing.
+- **TypeScript**: For type safety and better developer experience.
+- **Tailwind CSS**: For responsive and utility-first styling.
+- **Context API**: For global state management.
+- **React Toastify**: For displaying notifications throughout the app.
+- **PWA**: For offline support and mobile-first performance.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## Deployment
+
+To deploy the app:
+
+1. Ensure that your project is hosted on GitHub.
+2. Go to [Vercel](https://vercel.com/).
+3. Connect your GitHub repository to Vercel.
+4. Vercel will automatically detect the Next.js project and deploy it.
+
+---
+
+## Conclusion
+
+This Next.js application is a fully-featured web application that incorporates SSR, SSG, TypeScript, global state management, and authentication middleware. It also utilizes Tailwind CSS for responsive design and is optimized for mobile use as a PWA. The app is easily extendable and follows best practices for modern web development.

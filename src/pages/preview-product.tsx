@@ -23,9 +23,9 @@ const PreviewProduct = () => {
       </div>
       <ImageSlider images={formData?.images || ("" as any)} />
       <div className="">
-        <ProductDetails />
+        <ProductDetails formData={formData} />
 
-        <VendorInfo />
+        <VendorInfo formData={formData} />
       </div>
     </div>
   );

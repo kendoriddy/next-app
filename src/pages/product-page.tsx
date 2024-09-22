@@ -15,6 +15,33 @@ import { VariationOption } from "../components/VariationOption";
 import { IoAdd } from "react-icons/io5";
 import VariantPriceStockComponent from "@/components/VariantPriceStockComponent";
 
+// Server-Side Rendering (SSR) - fetching necessary data before rendering the page
+export async function getServerSideProps(context: { req: any }) {
+  const { req } = context;
+
+  // Perform authentication check on the server side (if required)
+  const authToken = req.cookies.authToken;
+
+  // We could also fetch other data related to products here (e.g., collections, variations, etc.)
+
+  if (!authToken) {
+    // If not authenticated, redirect to the login page
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  // Return data as props for the page component
+  return {
+    props: {
+      isAuthenticated: !!authToken,
+    },
+  };
+}
+
 const ProductsPage = () => {
   const { isAuthenticated, loading } = useContext(AuthContext);
   const { formData, setFormData } = useContext(FormContext);
@@ -74,13 +101,12 @@ const ProductsPage = () => {
         const updatedImages = [...selectedImages, ...newImages];
         setSelectedImages(updatedImages);
 
-        // Update formData with base64 images
         setFormData({
           ...formData,
           images: updatedImages.map((image) => ({
             name: image.name,
             isActive: image.isActive,
-            base64: image.base64, // Include base64 here
+            base64: image.base64,
           })),
         });
       };
