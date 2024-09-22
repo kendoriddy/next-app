@@ -12,8 +12,9 @@ import CollectionInput from "@/components/registrationSteps/CollectionInput";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { MdMoreHoriz } from "react-icons/md";
-import { VariationOption } from "./VariationOption";
+import { VariationOption } from "../components/VariationOption";
 import { IoAdd } from "react-icons/io5";
+import VariantPriceStockComponent from "@/components/VariantPriceStockComponent";
 
 const ProductsPage = () => {
   const { isAuthenticated, loading, logout } = useContext(AuthContext);
@@ -298,6 +299,16 @@ const ProductsPage = () => {
           )}
         </div>
 
+        <hr className="h-[0.5px] mb-4 -mx-4 mt-4" />
+        <div>
+          <div className="flex items-center justify-between mb-3">
+            <span className="self-start gap-2 flex items-center justify-start">
+              <span className="font-semibold text-[14px]">Configure variant prices and stocks</span>
+            </span>
+            <BiChevronDown className="text-[#00000099]" />
+          </div>
+          <VariantPriceStockComponent />
+        </div>
         <hr className="h-[0.5px] mb-4 -mx-4 mt-4" />
 
         {/* Shipping */}
